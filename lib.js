@@ -1,6 +1,6 @@
 const userName = process.env.SUDO_USER;
 const fs = require('fs');
-const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
 
 function newSite(serverName ) {
 	if(serverName !== undefined) {
@@ -40,25 +40,13 @@ function newSite(serverName ) {
 
 
 		fs.writeFileSync(`/etc/apache2/sites-available/${serverName}.conf`, template);
+		execSync(`a2ensite ${serverName}.conf`);
 		fs.writeFileSync('/etc/hosts', output);
-		exec(`mkdir -p /var/www/${serverName}/public_html/`, function(err) {});
-		exec(`a2ensite ${serverName}.conf`, function(err) {
-			if(err) {
-				console.log(err);
-			}
-		});
-		exec(`systemctl restart apache2`, function(err) {
-			if(err) {
-				console.log(err);
-			}
-		});
+		execSync(`mkdir -p /var/www/${serverName}/public_html/`);
+		execSync(`systemctl restart apache2`);
 		fs.writeFileSync(`/var/www/${serverName}/public_html/index.php`, `<?php echo "${serverName} is working" ?>`);
 
-		exec(`chown -R ${userName}:${userName} /var/www/${serverName}/`, function(err) {
-			if(err) {
-				console.log(err);
-			}
-		});
+		execSync(`chown -R ${userName}:${userName} /var/www/${serverName}/`);
 	}
 }
 
