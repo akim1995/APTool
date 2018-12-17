@@ -2,7 +2,7 @@ const userName = process.env.SUDO_USER;
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 
-function newSite(serverName ) {
+const newSite = serverName => {
 	if(serverName !== undefined) {
 
 		let re = /^\s*$/m;
@@ -48,6 +48,29 @@ function newSite(serverName ) {
 
 		execSync(`chown -R ${userName}:${userName} /var/www/${serverName}/`);
 	}
-}
+};
 
-module.exports = { newSite };
+const regExpFromSite = site => {
+	let escaped = site.replace(/\./g, '\\.');
+	return new RegExp('^.+' + escaped + '\n', 'mg');
+};
+
+const removeSite = serverName => {
+
+	let hosts = fs.readFileSync('/etc/hosts', 'utf-8');
+	let re = regExpFromSite(serverName);
+	if (!re.test(hosts)) {
+		console.log('site was not found');
+	}else {
+		hosts = hosts.replace(re, '');
+		fs.writeFileSync('/etc/hosts', hosts);
+		execSync(`a2dissite ${serverName}`);
+		fs.unlinkSync(`/etc/apache2/sites-available/${serverName}.conf`);
+		execSync(`rm -r /var/www/${serverName}`);
+		execSync('systemctl restart apache2');
+	}
+};
+
+
+
+module.exports = { newSite, removeSite };
