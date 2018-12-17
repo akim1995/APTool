@@ -12,6 +12,7 @@ const serverName = argv.name;
 // TODO write list function
 // TODO write remove function
 // TODO make program ask for sudo permissions;
+// TODO MAKE bitrix config optional
 
 
 if (command === 'create' && typeof serverName !== 'undefined') {
