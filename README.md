@@ -1,5 +1,5 @@
 # APTool
-Configure Apache sites
+Configure Apache sites on ubuntu
 
 ##instruction to create alias
 nvim ~/.bash_aliases
