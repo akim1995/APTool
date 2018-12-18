@@ -1,6 +1,7 @@
 const yargs = require('yargs');
 const newSite = require('./lib.js').newSite;
 const removeSite = require('./lib.js').removeSite;
+const listSites = require('./lib.js').listSites;
 
 const argv = yargs.argv;
 let command = argv._[0];
@@ -20,6 +21,10 @@ if (command === 'create' && typeof serverName !== 'undefined') {
 	newSite(serverName );
 } else if(command === 'remove' && typeof serverName !== 'undefined') {
 		removeSite(serverName)
+} else if(command === 'list' || 'ls') {
+    listSites().forEach(site => {
+        console.log(site);
+    })
 } else {
 	console.log('command is not recognized try command create with --name');
 }

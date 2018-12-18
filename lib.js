@@ -70,7 +70,15 @@ const removeSite = serverName => {
 		execSync('systemctl restart apache2');
 	}
 };
+const listSites = () => {
+   let sitesList = fs.readdirSync('/etc/apache2/sites-enabled');
+   let rmIndex = sitesList.indexOf('000-default.conf');
+   if(rmIndex !== -1){
+       sitesList.splice(rmIndex,1);
+       sitesList = sitesList.map(el => el.substr(0, el.length - 5));
+   }
 
+   return sitesList;
+};
 
-
-module.exports = { newSite, removeSite };
+module.exports = { newSite, removeSite, listSites};
