@@ -1,18 +1,19 @@
 {
   "name": "phptool",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Tool for createing apache sites",
+  "main": "gIndex.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "electron": "electron gIndex.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "AKim Khalitov",
   "license": "ISC",
   "dependencies": {
     "electron": "^3.0.13",
     "particles.js": "^2.0.0",
+    "sudo-prompt": "^8.2.5",
     "yargs": "^12.0.5"
   }
 }

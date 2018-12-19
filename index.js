@@ -2,7 +2,6 @@ const yargs = require('yargs');
 const newSite = require('./lib.js').newSite;
 const removeSite = require('./lib.js').removeSite;
 const listSites = require('./lib.js').listSites;
-
 const argv = yargs.argv;
 let command = argv._[0];
 
