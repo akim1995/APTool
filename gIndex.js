@@ -4,7 +4,7 @@ const { listSites, newSite, removeSite } = require('./lib.js');
 let mainWindow;
 
 app.on('ready', () => {
-	mainWindow = new BrowserWindow({width: 400});
+	mainWindow = new BrowserWindow({width: 440,});
 	mainWindow.loadURL(`file://${__dirname}/index.html`);
 	mainWindow.on('closed', () => app.quit() );
 	mainWindow.setMenu(null);
@@ -16,7 +16,11 @@ ipcMain.on('sites:list', () =>  {
 });
 
 ipcMain.on('site:add', (e, site) =>  {
-  newSite(site);
+	if (site !== '') {
+		  newSite(site);
+	}else {
+		console.log('cannot create empty site');
+	}
 });
 ipcMain.on('site:delete', (e, site) =>  {
 	removeSite(site);
