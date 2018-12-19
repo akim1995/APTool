@@ -2,9 +2,107 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>APTool</title>
+	<style>
+		* {
+			user-select: none;
+		}
+		ul {
+
+			list-style-type: decimal;
+			list-style-position: inside;
+			padding-left: 0;
+		}
+		li {
+			user-select: text;
+		}
+		li > button {
+			border: none;
+			background-color: transparent;
+			display: inline;
+			font-size: 18px;
+
+		}
+		li > button:hover {
+			color: red;
+		}
+		li > button:focus {
+      outline: none;
+		}
+	</style>
 </head>
 <body>
+<h1>APTool Alpha version</h1>
 
+<form id="addSite">
+	<label for="siteName">Add site</label>
+	<input id="siteName" type="text">
+	<button >+</button>
+</form>
+<ul>
+
+</ul>
+
+<script>
+	const electron = require('electron');
+	const {ipcRenderer, shell } = electron;
+	const ul = document.querySelector('ul');
+	ipcRenderer.send('sites:list');
+	ipcRenderer.on('sites:list', (e, sites) => {
+		ul.innerHTML = '';
+		sites.forEach(site => {
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'delBtn';
+      link.textContent = 'link';
+      link.href = 'http://' + site;
+      link.className = 'in_browser';
+      deleteBtn.innerHTML = '&times;';
+      const text = document.createTextNode(site + ' ');
+
+      li.setAttribute('data-site', site);
+      li.appendChild(text);
+
+			// li.appendChild(link);
+			li.appendChild(deleteBtn);
+      ul.appendChild(li);
+
+		});
+		const browserLinks = document.querySelectorAll('a.in_browser');
+		browserLinks.forEach(link => {
+			link.addEventListener('click', e => {
+				e.preventDefault();
+				let href = e.currentTarget.href;
+        shell.openExternal(href, undefined );
+			});
+		})
+
+		let delBtns = document.querySelectorAll('.delBtn');
+    delBtns.forEach(btn => {
+			btn.addEventListener('click', (e) => {
+				e.preventDefault();
+				let site = e.currentTarget.parentElement.getAttribute('data-site');
+				ipcRenderer.send('site:delete', site);
+				ipcRenderer.send('sites:list');
+			})
+		});
+
+	});
+	function AddSite() {
+		this.form =  document.querySelector('#addSite');
+		this.btn = this.form.querySelector('button');
+		this.input = this.form.querySelector('input');
+	}
+  const siteForm = new AddSite();
+	siteForm.form.addEventListener('submit', (e) =>{
+		e.preventDefault();
+		const siteToAdd = siteForm.input.value.trim().replace(/\s/g , '');
+		siteForm.input.value = '';
+		ipcRenderer.send('site:add', siteToAdd);
+		ipcRenderer.send('sites:list');
+	});
+
+</script>
 </body>
 </html>

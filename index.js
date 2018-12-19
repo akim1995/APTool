@@ -11,8 +11,6 @@ let command = argv._[0];
 const serverName = argv.name;
 
 
-// TODO write list function
-// TODO write remove function
 // TODO make program ask for sudo permissions;
 // TODO MAKE bitrix config optional
 
