@@ -3,47 +3,33 @@
 <head>
 	<meta charset="UTF-8">
 	<title>APTool</title>
+	<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 	<style>
-		* {
-			user-select: none;
-		}
-		ul {
-
-			list-style-type: decimal;
-			list-style-position: inside;
-			padding-left: 0;
-		}
-		li {
-			user-select: text;
-		}
-		li > button {
-			border: none;
-			background-color: transparent;
-			display: inline;
-			font-size: 18px;
-
-		}
-		li > button:hover {
-			color: red;
-		}
-		li > button:focus {
-      outline: none;
-		}
 	</style>
 </head>
-<body>
-<h1>APTool Alpha version</h1>
+<body >
 
-<form id="addSite">
-	<label for="siteName">Add site</label>
-	<input id="siteName" type="text">
-	<button >+</button>
-</form>
-<ul>
-
-</ul>
-
+<div id="particles-js">
+</div>
+	<div class="heading-container">
+		<h1 class="mainHeading">APTool</h1>
+	</div>
+	
+<div class="container">
+	<form id="addSite">
+		<input id="siteName" placeholder="Enter new site" autofocus type="text">
+		<button><i class="fas fa-plus-square"></i></button>
+	</form>
+	<div class="list-container">
+		<ul>
+		
+		</ul>
+	</div>
+</div>
+<footer>Developed by Akim Khalitov</footer>
 <script>
+	const particles = require('particles.js');
 	const electron = require('electron');
 	const {ipcRenderer, shell } = electron;
 	const ul = document.querySelector('ul');
@@ -58,7 +44,7 @@
       link.textContent = 'link';
       link.href = 'http://' + site;
       link.className = 'in_browser';
-      deleteBtn.innerHTML = '&times;';
+      deleteBtn.textContent = 'DELETE';
       const text = document.createTextNode(site + ' ');
 
       li.setAttribute('data-site', site);
@@ -102,6 +88,12 @@
 		ipcRenderer.send('site:add', siteToAdd);
 		ipcRenderer.send('sites:list');
 	});
+
+particlesJS.load('particles-js', 'assets/particles.json', function() {
+  console.log('callback - particles.js config loaded');
+});
+
+
 
 </script>
 </body>
