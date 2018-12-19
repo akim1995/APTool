@@ -1,0 +1,153 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('fonts/Inconsolata-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+html, body {
+    height: 100%;
+    * {
+        box-sizing: border-box;
+    }
+}
+body {
+    position: relative;
+    color: white;
+}
+form {
+    color: white;
+}
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+.heading-container {
+    padding-top: 22px;
+    .mainHeading {
+        font-family: 'Roboto';
+        font-size: 48px;
+        color: white;
+        font-weight: normal;
+        background: linear-gradient(270deg, rgba(196, 196, 196, 0.44) -5.2%, rgba(196, 196, 196, 0.34) 39.95%, rgba(196, 196, 196, 0) 94.8%);
+        text-align: center;
+    }
+}
+.container {
+    padding: 14px;
+}
+#addSite {
+    margin-top: 10px;
+    input {
+        margin-right: 8px;
+        background: rgba(196, 196, 196, 0.12);
+        border: none;
+        color: white;
+        width: 322px;
+        font-size: 22px;
+        padding: 7px 9px;
+        font-family: 'Inconsolata';
+        font-weight: normal;
+        &::selection {
+            color: black;
+            background: #ffffff;
+        }
+        &::placeholder {
+            color: rgb(179, 177, 177);
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    button {
+        height: 38px;
+        width: 38px;
+        background: radial-gradient(18.50px at 50% 50%, rgba(205, 222, 234, 0.8) 0%, rgba(77, 108, 130, 0.24) 100%);
+        border: none;
+        color: white;
+        text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.25);
+        font-size: 22px;
+        &:hover {
+
+            background: radial-gradient(18.50px at 50% 50%, rgba(205, 222, 234, 1) 0%, rgba(77, 108, 130, 0.40) 100%);
+        }
+    }
+}
+.list-container {
+    padding: 10px;
+    margin-top: 10px;
+    background: rgba(#F4F4F4, .4);
+    min-height: 380px;
+    ul {
+        li {
+            font-family: 'Inconsolata';
+            font-weight: normal;
+            position: relative;
+            font-size: 22px;
+            margin-bottom: 12px;
+
+        &::selection {
+            color: black;
+            background: #ffffff;
+        }
+        }
+        button {
+
+            font-family: 'Inconsolata';
+            font-weight: normal;
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: white;
+            background: black;
+            // border: 1px solid white;
+            background: rgba(#202020, .9);
+            font-size: 18px;
+            padding: 4px 6px;
+        }
+    }
+}
+#particles-js {
+    background:rgb(34, 34, 46);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -9999;
+    overflow: hidden;
+}
+ul {
+    color: #2B2B2B;
+
+    list-style-type: decimal-leading-zero;
+    list-style-position: inside;
+    padding-left: 0;
+}
+li {
+    user-select: text;
+}
+li > button {
+    border: none;
+    background-color: transparent;
+    display: inline;
+    font-size: 18px;
+
+}
+li > button:hover {
+    color: #ca4040;
+}
+li > button:focus {
+outline: none;
+}
+footer {
+    text-align: center;
+    font-family: ('Inconsolata');
+    font-weight: normal;
+    font-size: 20px;
+    text-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+}
