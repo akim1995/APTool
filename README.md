@@ -3,7 +3,7 @@ Configure Bitrix compatable Apache sites on Ubuntu
 
 ![Screenshot](APTool_011.png)
 
-##instruction to create alias
+## instruction to create alias
 edit  ~/.bash_aliases
 
 and insert these lines
