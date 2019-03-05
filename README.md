@@ -1,11 +1,12 @@
 # APTool
-Configure Apache sites on ubuntu
+Configure Bitrix compatable Apache sites on Ubuntu
 
 ![Screenshot](APTool_011.png)
 
 ##instruction to create alias
-nvim ~/.bash_aliases
+edit  ~/.bash_aliases
 
+and insert these lines
 
 alias APTool='sudo node ~/Projects/APTool/index.js'
 
