@@ -4,10 +4,10 @@ const { listSites, newSite, removeSite } = require('./lib.js');
 let mainWindow;
 
 app.on('ready', () => {
-	mainWindow = new BrowserWindow({width: 440,});
+	mainWindow = new BrowserWindow({width: 440, transparent: true, frame: false});
 	mainWindow.loadURL(`file://${__dirname}/index.html`);
 	mainWindow.on('closed', () => app.quit() );
-	mainWindow.setMenu(null);
+	// mainWindow.setMenu(null);
 	mainWindow.setResizable(false);
 });
 ipcMain.on('sites:list', () =>  {

@@ -43,3 +43,4 @@ if (command === 'create' && typeof serverName !== 'undefined') {
 	console.log('command is not recognized try command create with --name');
 }
 console.log('done');
+
